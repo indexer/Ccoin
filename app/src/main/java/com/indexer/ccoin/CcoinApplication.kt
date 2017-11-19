@@ -7,11 +7,16 @@ import android.app.Application
  */
 class CcoinApplication : Application() {
 
-    private var appComponent: AppComponent? = null
+    private lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
-        appComponent?.inject(this)
+        appComponent = DaggerAppComponent.builder().build()
+    }
+
+
+    fun getAppComponent(): AppComponent {
+        return appComponent
     }
 
 
