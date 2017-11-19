@@ -1,4 +1,4 @@
-package com.indexer.ccoin
+package com.indexer.ccoin.module
 
 import android.app.Application
 import dagger.Module

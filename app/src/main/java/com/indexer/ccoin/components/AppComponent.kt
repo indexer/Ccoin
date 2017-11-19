@@ -1,6 +1,8 @@
-package com.indexer.ccoin
+package com.indexer.ccoin.components
 
 import android.content.Context
+import com.indexer.ccoin.module.AppModule
+import com.indexer.ccoin.module.RoomModule
 import dagger.Component
 import javax.inject.Singleton
 

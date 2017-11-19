@@ -12,9 +12,7 @@ import com.indexer.ccoin.utils.enqueue
 
 class CoinListViewModel(application: Application) : AndroidViewModel(application) {
 
-
     var mAppDatabase: AppDatabase = AppDatabase.getDatabase(application.applicationContext)
-
 
     fun isDataBaseNotCreate(): LiveData<Boolean> {
         return mAppDatabase.isDatabaseCreated

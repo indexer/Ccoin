@@ -8,15 +8,21 @@ import com.indexer.ccoin.CcoinApplication
 import com.indexer.ccoin.R
 import com.indexer.ccoin.database.AppDatabase
 import com.indexer.ccoin.viewmodel.CoinListViewModel
+import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: CoinListViewModel
 
+    @Inject
+    lateinit var presenter: AppDatabase
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         (application as CcoinApplication).getAppComponent().inject(baseContext)
+
 
         viewModel = ViewModelProviders.of(this).get(CoinListViewModel::class.java)
         viewModel.fetchDataFromCurrencyCompare()
