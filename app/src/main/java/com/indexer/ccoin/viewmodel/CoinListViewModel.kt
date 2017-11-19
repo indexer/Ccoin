@@ -8,10 +8,17 @@ import android.util.Log
 import com.indexer.ccoin.api.RestClient
 import com.indexer.ccoin.database.AppDatabase
 import com.indexer.ccoin.utils.enqueue
+import javax.inject.Inject
+
+
 
 
 class CoinListViewModel(application: Application) : AndroidViewModel(application) {
-    var mAppDatabase: AppDatabase = AppDatabase.getDatabase(application.applicationContext)
+
+    @Inject private
+    lateinit var mAppDatabase: AppDatabase
+    //var mAppDatabase: AppDatabase = AppDatabase.getDatabase(application.applicationContext)
+
 
     fun isDataBaseNotCreate(): LiveData<Boolean> {
         return mAppDatabase.isDatabaseCreated

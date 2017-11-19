@@ -9,7 +9,7 @@ import javax.inject.Singleton
  * AppCompnent is will inject
  */
 @Singleton
-@Component(modules = arrayOf(AppModule::class))
+@Component(modules = arrayOf(AppModule::class, RoomModule::class))
 interface AppComponent {
     fun inject(app: Context)
 }
