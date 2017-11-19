@@ -5,7 +5,7 @@ import com.indexer.ccoin.components.AppComponent
 import com.indexer.ccoin.components.DaggerAppComponent
 import com.indexer.ccoin.module.AppModule
 import com.indexer.ccoin.module.RoomModule
-import dagger.Module
+import com.squareup.leakcanary.LeakCanary
 
 /**
  * Created by indexer on 19/11/17.
@@ -14,12 +14,12 @@ class CcoinApplication : Application() {
 
     private lateinit var appComponent: AppComponent
 
-
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerAppComponent.builder().
-                appModule(AppModule(this))
+        appComponent = DaggerAppComponent.builder()
+                .appModule(AppModule(this))
                 .roomModule(RoomModule(this)).build()
+        LeakCanary.install(this)
     }
 
 

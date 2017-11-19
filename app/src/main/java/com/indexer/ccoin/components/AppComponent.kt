@@ -3,6 +3,7 @@ package com.indexer.ccoin.components
 import com.indexer.ccoin.module.AppModule
 import com.indexer.ccoin.module.RoomModule
 import com.indexer.ccoin.view.dashboard.dashboard.MainActivity
+import com.indexer.ccoin.view.dashboard.detail.DetailActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -14,4 +15,5 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(AppModule::class, RoomModule::class))
 interface AppComponent {
     fun inject(app: MainActivity)
+    fun inject(app: DetailActivity)
 }
