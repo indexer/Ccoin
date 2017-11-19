@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        (application as CcoinApplication).appComponent.inject(baseContext)
+       // (application as CcoinApplication).appComponent.inject(baseContext)
 
         viewModel = ViewModelProviders.of(this).get(CoinListViewModel::class.java)
         viewModel.fetchDataFromCurrencyCompare()

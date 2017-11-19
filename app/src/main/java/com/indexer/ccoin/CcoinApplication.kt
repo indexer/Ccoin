@@ -1,18 +1,17 @@
 package com.indexer.ccoin
 
 import android.app.Application
-import javax.inject.Inject
 
 /**
  * Created by indexer on 19/11/17.
  */
 class CcoinApplication : Application() {
 
-    lateinit var appComponent: AppComponent
+    private var appComponent: AppComponent? = null
 
     override fun onCreate() {
         super.onCreate()
-        appComponent.inject(this)
+        appComponent?.inject(this)
     }
 
 
