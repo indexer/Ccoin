@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.indexer.ccoin.CcoinApplication
 import com.indexer.ccoin.R
 import com.indexer.ccoin.database.AppDatabase
@@ -15,14 +16,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: CoinListViewModel
 
     @Inject
-    lateinit var presenter: AppDatabase
+    lateinit var mAppDatabase: AppDatabase
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        (application as CcoinApplication).getAppComponent().inject(baseContext)
-
+        (application as CcoinApplication).getAppComponent().inject(this)
 
         viewModel = ViewModelProviders.of(this).get(CoinListViewModel::class.java)
         viewModel.fetchDataFromCurrencyCompare()
