@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.indexer.ccoin.R
 import com.indexer.ccoin.database.AppDatabase
+import com.indexer.ccoin.model.Coin
 import com.indexer.ccoin.viewmodel.CoinListViewModel
 
 
@@ -15,13 +16,11 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         viewModel = ViewModelProviders.of(this).get(CoinListViewModel::class.java!!)
         viewModel.fetchDataFromCurrencyCompare()
         viewModel.isDataBaseNotCreate().observe(this, Observer {
 
         })
-
 
     }
 

@@ -9,11 +9,13 @@ import com.indexer.ccoin.api.RestClient
 import com.indexer.ccoin.database.AppDatabase
 import com.indexer.ccoin.model.Coin
 import com.indexer.ccoin.utils.enqueue
-import io.reactivex.android.schedulers.AndroidSchedulers
-import java.util.ArrayList
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
+import kotlin.collections.ArrayList
 
 
 class CoinListViewModel(application: Application) : AndroidViewModel(application) {
+
 
     private var mAppDatabase: AppDatabase = AppDatabase
             .getDatabase(application.applicationContext)
@@ -21,18 +23,18 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
     private var mList = ArrayList<Coin>()
 
 
-    fun isDataBaseNotCreate(): LiveData<Boolean> {
-        return mAppDatabase.isDatabaseCreated
-    }
+    fun isDataBaseNotCreate(): LiveData<Boolean> = mAppDatabase.isDatabaseCreated
 
-    fun insertData(coins: List<Coin>) {
-        io.reactivex.Observable.fromCallable<List<Coin>> {
-            mAppDatabase.coinDao.insertAllCoin(coins)
-            null
-        }.observeOn(AndroidSchedulers.mainThread()).subscribe()
+    private fun insertData(coins: ArrayList<Coin>) {
+        Observable.just(mAppDatabase)
+                .subscribeOn(Schedulers.io())
+                .subscribe { db ->
+                    db.coinDao.insertAllCoin(coins)
+                }
     }
 
     fun fetchDataFromCurrencyCompare() {
+
         val coinList = RestClient.getService(getApplication())
                 .getCoinList()
         coinList.enqueue(success = { response ->
@@ -43,8 +45,7 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
                 insertData(mList)
             }
 
-        }, failure = { response ->
-            Log.e("Response", response.message)
+        }, failure = { _ ->
         })
     }
 
