@@ -1,10 +1,11 @@
-package com.indexer.ccoin.view.dashboard.dashboard
+package com.indexer.ccoin.view.dashboard
 
 import android.app.Application
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.indexer.ccoin.CcoinApplication
 import com.indexer.ccoin.R
 import com.indexer.ccoin.database.AppDatabase
@@ -32,6 +33,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.isDataBaseNotCreate().observe(this, Observer {
             Timber.e("isCreate", "" + mApplication + " " +
                     mAppDatabase.isDatabaseCreated.value)
+        })
+        viewModel.getCoint().observe(this, Observer {
+            Log.e("value", "" + it!!.size)
         })
     }
 

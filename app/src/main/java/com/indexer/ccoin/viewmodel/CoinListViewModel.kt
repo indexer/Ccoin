@@ -4,6 +4,7 @@ package com.indexer.ccoin.viewmodel
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
+import android.arch.paging.PagedList
 import com.indexer.ccoin.api.RestClient
 import com.indexer.ccoin.database.AppDatabase
 import com.indexer.ccoin.model.Coin
@@ -19,21 +20,24 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
     private var mAppDatabase: AppDatabase = AppDatabase
             .getDatabase(application.applicationContext)
 
+
     private var mList = ArrayList<Coin>()
 
     fun isDataBaseNotCreate(): LiveData<Boolean> = mAppDatabase.isDatabaseCreated
 
+    fun getCoint(): LiveData<PagedList<Coin>> = mAppDatabase.coinDao
+            .getAllCoinList().create(0,
+            PagedList.Config.Builder().setPageSize(20).setPrefetchDistance(10).build())
+
     private fun insertData(coins: ArrayList<Coin>) {
-        val subscribe = Observable.just(mAppDatabase)
+        Observable.just(mAppDatabase)
                 .subscribeOn(Schedulers.io())
-                .subscribe {
-                    it.coinDao.insertAllCoin(coins)
+                .subscribe { it: AppDatabase? ->
+                    it?.coinDao?.insertAllCoin(coins)
                 }
-        subscribe.dispose()
     }
 
     fun fetchDataFromCurrencyCompare() {
-
         val coinList = RestClient.getService(getApplication())
                 .getCoinList()
         coinList.enqueue(success = {
