@@ -13,7 +13,7 @@ import android.arch.persistence.room.OnConflictStrategy
  */
 @Dao
 interface CoinDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllCoin(products: List<Coin>)
 
     @Query("SELECT * FROM coin ORDER BY Id ASC")

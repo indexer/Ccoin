@@ -16,18 +16,17 @@ import kotlin.collections.ArrayList
 
 class CoinListViewModel(application: Application) : AndroidViewModel(application) {
 
-
     private var mAppDatabase: AppDatabase = AppDatabase
             .getDatabase(application.applicationContext)
-
 
     private var mList = ArrayList<Coin>()
 
     fun isDataBaseNotCreate(): LiveData<Boolean> = mAppDatabase.isDatabaseCreated
 
-    fun getCoint(): LiveData<PagedList<Coin>> = mAppDatabase.coinDao
+    fun getCoins(): LiveData<PagedList<Coin>> = mAppDatabase.coinDao
             .getAllCoinList().create(0,
-            PagedList.Config.Builder().setPageSize(20).setPrefetchDistance(10).build())
+            PagedList.Config.Builder().setPageSize(10).setEnablePlaceholders(false)
+                    .setPrefetchDistance(5).build())
 
     private fun insertData(coins: ArrayList<Coin>) {
         Observable.just(mAppDatabase)
