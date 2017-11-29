@@ -18,13 +18,14 @@ class RoomModule(mApplication: Application) {
 
     @Singleton
     @Provides
-    internal fun providesRoomDatabase(): AppDatabase {
+    fun providesRoomDatabase(): AppDatabase {
         return appDatabase
     }
 
+
     @Singleton
     @Provides
-    internal fun providesProductDao(demoDatabase: AppDatabase): CoinDao {
+    fun providesCoinDao(demoDatabase: AppDatabase): CoinDao {
         return demoDatabase.coinDao
     }
 

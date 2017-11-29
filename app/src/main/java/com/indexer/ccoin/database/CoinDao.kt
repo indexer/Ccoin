@@ -17,5 +17,8 @@ interface CoinDao {
     fun insertAllCoin(products: List<Coin>)
 
     @Query("SELECT * FROM coin ORDER BY Id ASC")
-    fun getAllCoinList(): LivePagedListProvider<Int, Coin>
+    fun getAllCoinListWithPage(): LivePagedListProvider<Int, Coin>
+
+    @Query("SELECT * FROM coin")
+    fun getAllCoin(): List<Coin>
 }
