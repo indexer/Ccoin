@@ -11,13 +11,16 @@ import kotlinx.android.synthetic.main.coin_item.view.*
 /**
  * Created by indexer on 3/12/17.
  */
-class CoinViewHolder(itemView: View, listener: OnItemClickListener?)
+class CoinViewHolder(itemView: View, listener: com.indexer.ccoin.view.dashboard.listener.OnItemClickListener)
     : BaseViewHolder(itemView, listener) {
+    lateinit var coin: Coin
 
     override fun onClick(v: View) {
+        listener.onItemClick(adapterPosition)
     }
 
     fun onBind(coin: Coin?) {
+        this.coin = coin!!
         itemView.coin_name.text = "Coin Name : " + coin?.coinName
         itemView.coin_algo.text = "Coin Alogrithm : " + coin?.algorithm
         itemView.context.picasso.load("https://www.cryptoco" +
@@ -27,3 +30,4 @@ class CoinViewHolder(itemView: View, listener: OnItemClickListener?)
         itemView.coin_total_supply.text = "Coin Total Supply : " + coin?.totalCoinSupply
     }
 }
+

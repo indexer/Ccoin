@@ -1,5 +1,6 @@
 package com.indexer.ccoin.database
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Query
 import com.indexer.ccoin.model.Coin
 import android.arch.paging.LivePagedListProvider
@@ -21,4 +22,7 @@ interface CoinDao {
 
     @Query("SELECT * FROM coin")
     fun getAllCoin(): List<Coin>
+
+    @Query("SELECT * FROM coin WHERE coinId IN (:coinIds)")
+    fun findByCoinIds(coinIds: List<String>): LiveData<List<Coin>>
 }
