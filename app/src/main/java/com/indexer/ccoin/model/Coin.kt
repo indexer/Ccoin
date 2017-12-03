@@ -23,21 +23,31 @@ class Coin() : Parcelable {
     @SerializedName("Algorithm")
     var algorithm: String? = ""
     @Expose
+    @SerializedName("CoinName")
+    var coinName: String? = ""
+    @Expose
     @SerializedName("ProofType")
     var proofType: String? = ""
+    @Expose
+    @SerializedName("TotalCoinSupply")
+    var totalCoinSupply: String? = ""
 
     constructor(parcel: Parcel) : this() {
         coinId = parcel.readString()
         imageUrl = parcel.readString()
         algorithm = parcel.readString()
+        coinName = parcel.readString()
         proofType = parcel.readString()
+        totalCoinSupply = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(coinId)
         parcel.writeString(imageUrl)
         parcel.writeString(algorithm)
+        parcel.writeString(coinName)
         parcel.writeString(proofType)
+        parcel.writeString(totalCoinSupply)
     }
 
     override fun describeContents(): Int {
@@ -54,12 +64,12 @@ class Coin() : Parcelable {
         }
 
         val DIFF_CALLBACK: DiffCallback<Coin> = object : DiffCallback<Coin>() {
-            override fun areItemsTheSame(oldPokemon: Coin, newPokemon: Coin): Boolean {
-                return oldPokemon.coinId === newPokemon.coinId
+            override fun areItemsTheSame(oldCoin: Coin, newCoin: Coin): Boolean {
+                return oldCoin.coinId === newCoin.coinId
             }
 
-            override fun areContentsTheSame(oldPokemon: Coin, newPokemon: Coin): Boolean {
-                return oldPokemon.coinId == newPokemon.coinId
+            override fun areContentsTheSame(oldCoin: Coin, newCoin: Coin): Boolean {
+                return oldCoin.coinId == newCoin.coinId
             }
         }
     }

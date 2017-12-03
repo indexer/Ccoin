@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "af9825f858ed794f7db5e7509290b7b8",
+    "identityHash": "aa76165df4caa6c1d1c3fe41ce76d93b",
     "entities": [
       {
         "tableName": "coin",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`coinId` TEXT NOT NULL, `imageUrl` TEXT, `algorithm` TEXT, `proofType` TEXT, PRIMARY KEY(`coinId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`coinId` TEXT NOT NULL, `imageUrl` TEXT, `algorithm` TEXT, `coinName` TEXT, `proofType` TEXT, `totalCoinSupply` TEXT, PRIMARY KEY(`coinId`))",
         "fields": [
           {
             "fieldPath": "coinId",
@@ -27,8 +27,20 @@
             "notNull": false
           },
           {
+            "fieldPath": "coinName",
+            "columnName": "coinName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
             "fieldPath": "proofType",
             "columnName": "proofType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "totalCoinSupply",
+            "columnName": "totalCoinSupply",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -45,7 +57,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"af9825f858ed794f7db5e7509290b7b8\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"aa76165df4caa6c1d1c3fe41ce76d93b\")"
     ]
   }
 }

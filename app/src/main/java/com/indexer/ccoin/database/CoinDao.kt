@@ -16,7 +16,7 @@ interface CoinDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllCoin(products: List<Coin>)
 
-    @Query("SELECT * FROM coin ORDER BY coinId ASC")
+    @Query("SELECT * FROM coin ORDER BY coinName ASC")
     fun getAllCoinListWithPage(): LivePagedListProvider<Int, Coin>
 
     @Query("SELECT * FROM coin")
