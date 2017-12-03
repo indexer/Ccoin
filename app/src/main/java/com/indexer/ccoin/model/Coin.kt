@@ -7,6 +7,8 @@ import android.os.Parcelable
 import android.support.annotation.NonNull
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import android.support.v7.recyclerview.extensions.DiffCallback
+
 
 @Entity(tableName = "coin")
 class Coin() : Parcelable {
@@ -50,5 +52,17 @@ class Coin() : Parcelable {
         override fun newArray(size: Int): Array<Coin?> {
             return arrayOfNulls(size)
         }
+
+        val DIFF_CALLBACK: DiffCallback<Coin> = object : DiffCallback<Coin>() {
+            override fun areItemsTheSame(oldPokemon: Coin, newPokemon: Coin): Boolean {
+                return oldPokemon.coinId === newPokemon.coinId
+            }
+
+            override fun areContentsTheSame(oldPokemon: Coin, newPokemon: Coin): Boolean {
+                return oldPokemon.coinId == newPokemon.coinId
+            }
+        }
     }
+
+
 }
