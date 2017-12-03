@@ -5,6 +5,7 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.paging.PagedList
+import android.content.Context
 import android.util.Log
 import com.indexer.ccoin.api.RestClient
 import com.indexer.ccoin.database.AppDatabase
@@ -22,14 +23,6 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
     fun isDataBaseNotCreate(appDatabase: AppDatabase?):
             LiveData<Boolean>? = appDatabase?.isDatabaseCreated
 
-    fun getAllcoins(
-            appDatabase: AppDatabase?) {
-        Observable.just(appDatabase)
-                .subscribeOn(Schedulers.io())
-                .subscribe { it: AppDatabase? ->
-                    Log.e("coins", "" + it?.coinDao?.getAllCoin()?.size)
-                }
-    }
 
     fun getCoinsWithPage(appDatabase: AppDatabase?):
             LiveData<PagedList<Coin>>? = appDatabase?.coinDao
@@ -37,8 +30,8 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
             PagedList.Config.Builder().setPageSize(10).setEnablePlaceholders(false)
                     .setPrefetchDistance(5).build())
 
-    fun insertData(coins: ArrayList<Coin>,
-                   appDatabase: AppDatabase?) {
+    private fun insertData(coins: ArrayList<Coin>,
+                           appDatabase: AppDatabase?) {
         Observable.just(appDatabase)
                 .subscribeOn(Schedulers.io())
                 .subscribe { it: AppDatabase? ->
@@ -46,8 +39,8 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
                 }
     }
 
-    fun fetchDataFromCurrencyCompare(appDatabase: AppDatabase?) {
-        val coinList = RestClient.getService(getApplication())
+    fun fetchDataFromCurrencyCompare(appDatabase: AppDatabase?, context: Context) {
+        val coinList = RestClient.getService(context)
                 .getCoinList()
         coinList.enqueue(success = {
             if (it.isSuccessful) {

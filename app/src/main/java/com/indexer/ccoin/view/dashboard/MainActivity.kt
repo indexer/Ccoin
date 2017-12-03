@@ -19,21 +19,19 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var mAppDatabase: AppDatabase
 
-    @Inject
-    lateinit var mApplication: Application
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as CcoinApplication).getAppComponent().inject(this)
         conViewModel = ViewModelProviders.of(this).get(CoinListViewModel::class.java)
-        conViewModel.getAllcoins(appDatabase = mAppDatabase)
-        conViewModel.fetchDataFromCurrencyCompare(mAppDatabase)
-        conViewModel.getCoinsWithPage(mAppDatabase)?.observe(this, Observer {
-            Log.e("total", "=" + it?.size)
-            /*when {it?.size == 0 ->
-            }*/
+        with(conViewModel) {
+            fetchDataFromCurrencyCompare(mAppDatabase, this@MainActivity)
+            conViewModel.getCoinsWithPage(mAppDatabase)?.observe(this@MainActivity, Observer {
+                Log.e("total", "=" + it?.size)
 
-        })
+            })
+        }
+
     }
 
     override fun setContentView(layoutResID: Int) {

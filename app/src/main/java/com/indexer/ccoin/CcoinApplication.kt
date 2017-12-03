@@ -17,7 +17,6 @@ class CcoinApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         appComponent = DaggerAppComponent.builder()
-                .appModule(AppModule(this))
                 .roomModule(RoomModule(this)).build()
         LeakCanary.install(this)
     }

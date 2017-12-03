@@ -13,7 +13,7 @@ import android.content.Context
 import com.indexer.ccoin.model.Coin
 
 
-@Database(entities = arrayOf(Coin::class), version = 1)
+@Database(entities = [(Coin::class)], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     val isDatabaseCreated: LiveData<Boolean> get() = mIsDatabaseCreated
