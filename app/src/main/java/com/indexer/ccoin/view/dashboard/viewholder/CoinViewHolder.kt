@@ -7,7 +7,6 @@ import com.indexer.ccoin.model.Coin
 import com.indexer.ccoin.utils.picasso
 import kotlinx.android.synthetic.main.coin_item.view.*
 
-
 /**
  * Created by indexer on 3/12/17.
  */
@@ -21,13 +20,19 @@ class CoinViewHolder(itemView: View, listener: com.indexer.ccoin.view.dashboard.
 
     fun onBind(coin: Coin?) {
         this.coin = coin!!
-        itemView.coin_name.text = "Coin Name : " + coin?.coinName
-        itemView.coin_algo.text = "Coin Alogrithm : " + coin?.algorithm
-        itemView.context.picasso.load("https://www.cryptoco" +
-                "mpare.com" + coin?.imageUrl).placeholder(R.drawable.place_holder)
-                .resize(150, 150)
+        itemView.coin_name.text = itemView.resources.getString(R.string.coin_name)
+                .plus(other = coin.coinName)
+        itemView.coin_algo.text = itemView.resources.
+                getString(R.string.coin_algorithm).plus(other = coin.algorithm)
+        itemView.context.picasso.load(itemView.resources.getString(R.string.default_url)
+                .plus(other = coin.imageUrl)).placeholder(R.drawable.place_holder)
+                .resize(itemView.resources.getDimension(R.dimen.picasso_resize_image).toInt(),
+                        itemView.resources.getDimension(R.dimen.picasso_resize_image).toInt())
                 .centerCrop().into(itemView.coin_image)
-        itemView.coin_total_supply.text = "Coin Total Supply : " + coin?.totalCoinSupply
+        itemView.coin_total_supply.text = itemView.resources
+                .getString(R.string.default_url).plus(other = coin.imageUrl)
+
     }
+
 }
 

@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         startActivity(intent)
     }
 
-
     private lateinit var conViewModel: CoinListViewModel
 
     @Inject
@@ -39,8 +38,8 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         super.onCreate(savedInstanceState)
         (application as CcoinApplication).getAppComponent().inject(this)
         setContentView(R.layout.activity_main)
-        setUpRecyclerViewAndAdapter()
         setUpViewModel()
+        setUpRecyclerViewAndAdapter()
     }
 
     override fun onDestroy() {
@@ -52,21 +51,19 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         conViewModel = ViewModelProviders.of(this)
                 .get(CoinListViewModel::class.java)
         with(conViewModel) {
-            fetchDataFromCurrencyCompare(mAppDatabase, this@MainActivity)
             conViewModel.getCoinsWithPage(mAppDatabase)?.observe(this@MainActivity, Observer {
-                when {
-                    it != null -> {
-                        if (it.size > 0)
-                            mprogress.visibility = View.GONE
-                        coin_name.visibility = View.VISIBLE
-                        coinListAdapter.setList(it)
-                    }
+                if (it?.size!! > 0) {
+                    mprogress.visibility = View.GONE
+                    coin_name.visibility = View.VISIBLE
+                    coinListAdapter.setList(it)
+                } else {
+                    fetchDataFromCurrencyCompare(mAppDatabase, this@MainActivity)
                 }
             })
 
-            conViewModel.getMultipleIds(mAppDatabase)?.observe(this@MainActivity, Observer {
-                Log.e("size in muptiple", "" + it?.size)
-            })
+            /* conViewModel.getMultipleIds(mAppDatabase)?.observe(this@MainActivity, Observer {
+                 Log.e("size in muptiple", "" + it?.size)
+             })*/
 
         }
     }

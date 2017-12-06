@@ -18,7 +18,8 @@ import kotlin.collections.ArrayList
 class CoinListViewModel(application: Application) : AndroidViewModel(application) {
 
     private var mList = ArrayList<Coin>()
-    private val list = arrayListOf("1182", "7605", "5038", "24854", "3807", "3808", "202330", "5324", "5031", "20131")
+    private val list = arrayListOf("1182", "7605", "5038",
+            "24854", "3807", "3808", "202330", "5324", "5031", "20131")
 
     fun isDataBaseNotCreate(appDatabase: AppDatabase?):
             LiveData<Boolean>? = appDatabase?.isDatabaseCreated
@@ -29,8 +30,8 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
     fun getCoinsWithPage(appDatabase: AppDatabase?):
             LiveData<PagedList<Coin>>? = appDatabase?.coinDao
             ?.getAllCoinListWithPage()?.create(0,
-            PagedList.Config.Builder().setPageSize(10).setEnablePlaceholders(false)
-                    .setPrefetchDistance(5).build())
+            PagedList.Config.Builder().setPageSize(50).setEnablePlaceholders(false)
+                    .setPrefetchDistance(50).build())
 
     private fun insertData(coins: ArrayList<Coin>,
                            appDatabase: AppDatabase?) {

@@ -29,7 +29,8 @@ abstract class AppDatabase : RoomDatabase() {
             mIsDatabaseCreated.value = false// Trigger an update to show a loading screen.
             when (INSTANCE) {
                 null -> {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java,
+                    INSTANCE = Room.databaseBuilder(context.applicationContext,
+                            AppDatabase::class.java,
                             "product_db")
                             .build()
                     mIsDatabaseCreated.value = true

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Ccoin</string>
+    <string name="coin_name">Coin name : </string>
+    <string name="coin_algorithm">Coin Algorithm :</string>
+    <string name="coin_supply">Coin Total Supply : </string>
+    <string name="default_url">https://www.cryptocompare.com</string>
 </resources>
