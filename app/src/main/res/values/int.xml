@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="picasso_resize_image">150</integer>
+    <integer name="default_time_out">60</integer>
+    <integer name="connect_time_out">10</integer>
+</resources>

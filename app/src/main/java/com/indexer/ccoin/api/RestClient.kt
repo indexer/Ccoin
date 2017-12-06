@@ -1,8 +1,9 @@
 package com.indexer.ccoin.api
 
-import android.content.Context
+import com.indexer.ccoin.R
 import com.zeta.dashboard.api.ApiService
 import okhttp3.*
+import okhttp3.internal.Internal.instance
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.*
 import retrofit2.Retrofit
@@ -20,35 +21,33 @@ class RestClient private constructor() {
     }
 
     private fun getNewHttpClient(): OkHttpClient {
+        val defaultTimeout = R.integer.default_time_out.toLong()
+        val connectTimeout = R.integer.connect_time_out.toLong()
         val builder = OkHttpClient.Builder().followRedirects(true)
                 .followSslRedirects(true)
                 .retryOnConnectionFailure(true)
                 .cache(null).apply {
             addInterceptor(HttpLoggingInterceptor().setLevel(Level.NONE))
-            connectTimeout(10, TimeUnit.SECONDS)
+            connectTimeout(connectTimeout, TimeUnit.SECONDS)
             followRedirects(true)
             followSslRedirects(true)
-            writeTimeout(60, TimeUnit.SECONDS)
-            readTimeout(60, TimeUnit.SECONDS)
-            connectTimeout(60, TimeUnit.SECONDS)
-                    .writeTimeout(60, TimeUnit.SECONDS)
-                    .readTimeout(60, TimeUnit.SECONDS)
+            writeTimeout(defaultTimeout, TimeUnit.SECONDS)
+            readTimeout(defaultTimeout, TimeUnit.SECONDS)
+            connectTimeout(defaultTimeout, TimeUnit.SECONDS)
+                    .writeTimeout(defaultTimeout, TimeUnit.SECONDS)
+                    .readTimeout(defaultTimeout, TimeUnit.SECONDS)
         }
         return builder.build()
     }
 
 
     companion object {
-        private var instance: RestClient? = null
         @Synchronized
-        fun getService(context: Context): ApiService {
-            return getInstance(context).mService
+        fun getService(): ApiService {
+            return getInstance().mService
         }
 
-        private fun getInstance(context: Context): RestClient {
-            if (instance == null) {
-                instance = RestClient()
-            }
+        private fun getInstance(): RestClient {
             return instance as RestClient
         }
     }

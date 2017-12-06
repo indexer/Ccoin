@@ -5,7 +5,6 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.paging.PagedList
-import android.content.Context
 import com.indexer.ccoin.api.RestClient
 import com.indexer.ccoin.database.AppDatabase
 import com.indexer.ccoin.model.Coin
@@ -42,8 +41,8 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
                 }
     }
 
-    fun fetchDataFromCurrencyCompare(appDatabase: AppDatabase?, context: Context) {
-        val coinList = RestClient.getService(context)
+    fun fetchDataFromCurrencyCompare(appDatabase: AppDatabase?) {
+        val coinList = RestClient.getService()
                 .getCoinList()
         coinList.enqueue(success = {
             if (it.isSuccessful) {
