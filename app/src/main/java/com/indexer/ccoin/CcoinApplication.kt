@@ -18,7 +18,6 @@ class CcoinApplication : Application() {
         super.onCreate()
         appComponent = DaggerAppComponent.builder()
                 .roomModule(RoomModule(this)).build()
-        LeakCanary.install(this)
     }
 
 

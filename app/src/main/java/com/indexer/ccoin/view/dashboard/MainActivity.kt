@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
 import com.indexer.ccoin.CcoinApplication
 import com.indexer.ccoin.R
@@ -59,10 +60,9 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
                     fetchDataFromCurrencyCompare(mAppDatabase)
                 }
             })
-
             /* conViewModel.getMultipleIds(mAppDatabase)?.observe(this@MainActivity, Observer {
-                 Log.e("size in muptiple", "" + it?.size)
-             })*/
+          Log.e("size in muptiple", "" + it?.size)
+      })*/
 
         }
     }

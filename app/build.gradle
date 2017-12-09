@@ -100,10 +100,14 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
 
     //Roboelectrice
-    testImplementation "org.robolectric:robolectric:3.5.1"
+    testCompile "org.robolectric:robolectric:3.5.1"
 
     //kotlin
     compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.19.3'
+
+    //typeface
+    compile 'com.elmargomez.typer:typerlib:1.0.0'
+
 
 
 }

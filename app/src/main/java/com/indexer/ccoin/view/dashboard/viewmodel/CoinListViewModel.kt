@@ -5,6 +5,7 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.paging.PagedList
+import android.util.Log
 import com.indexer.ccoin.api.RestClient
 import com.indexer.ccoin.database.AppDatabase
 import com.indexer.ccoin.model.Coin
@@ -26,19 +27,30 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
     fun getMultipleIds(appDatabase: AppDatabase?):
             LiveData<List<Coin>>? = appDatabase?.coinDao?.findByCoinIds(list)
 
+    fun getAllValue(appDatabase: AppDatabase?): List<Coin> {
+
+        val coinTotal = Observable.just(appDatabase).subscribeOn(Schedulers.io()).map { it ->
+            it.coinDao.getAllCoin()
+        }.blockingFirst() as ArrayList<Coin>
+        System.out.println("mList" + Observable.just(appDatabase).subscribeOn(Schedulers.io()).map { it ->
+            it.coinDao.getAllCoin()
+        }.blockingFirst() as ArrayList<Coin>)
+        return coinTotal
+    }
+
+
     fun getCoinsWithPage(appDatabase: AppDatabase?):
             LiveData<PagedList<Coin>>? = appDatabase?.coinDao
             ?.getAllCoinListWithPage()?.create(0,
-            PagedList.Config.Builder().setPageSize(50).setEnablePlaceholders(false)
-                    .setPrefetchDistance(50).build())
+            PagedList.Config.Builder().setPageSize(10).setEnablePlaceholders(false)
+                    .setPrefetchDistance(10).build())
 
     private fun insertData(coins: ArrayList<Coin>,
                            appDatabase: AppDatabase?) {
-        Observable.just(appDatabase)
-                .subscribeOn(Schedulers.io())
-                .subscribe { it: AppDatabase? ->
-                    it?.coinDao?.insertAllCoin(coins)
-                }
+        Observable.just(appDatabase).subscribeOn(Schedulers.io()).map { it ->
+            it.coinDao.insertAllCoin(coins)
+        }.subscribe()
+
     }
 
     fun fetchDataFromCurrencyCompare(appDatabase: AppDatabase?) {

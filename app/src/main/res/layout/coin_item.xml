@@ -6,10 +6,10 @@
     android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_small"
-        android:id="@+id/relativeLayout">
+        android:layout_margin="@dimen/margin_small">
 
         <ImageView
             android:id="@+id/coin_image"
@@ -17,9 +17,9 @@
             android:layout_height="@dimen/image_default"
             android:padding="@dimen/padding_small"
             android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:src="@drawable/place_holder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/coin_name"
@@ -28,28 +28,37 @@
             android:fontFamily="sans-serif-condensed"
             android:padding="@dimen/secondary_padding"
             android:text="@string/app_name"
+            android:textSize="@dimen/title_default"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/coin_image" />
+            app:layout_constraintStart_toEndOf="@+id/coin_image"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/coin_algo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_all_inclusive_black_24dp"
+            android:drawablePadding="@dimen/margin_small"
             android:fontFamily="sans-serif"
+            android:gravity="center_vertical"
             android:padding="@dimen/secondary_padding"
             android:text="@string/app_name"
-            app:layout_constraintTop_toBottomOf="@+id/coin_name"
-            app:layout_constraintStart_toEndOf="@+id/coin_image" />
+            android:textSize="@dimen/secondary_default"
+            app:layout_constraintStart_toEndOf="@+id/coin_image"
+            app:layout_constraintTop_toBottomOf="@+id/coin_name" />
 
         <TextView
             android:id="@+id/coin_total_supply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_trending_up_black_24dp"
+            android:drawablePadding="@dimen/margin_small"
             android:fontFamily="sans-serif"
+            android:gravity="center_vertical"
             android:padding="@dimen/secondary_padding"
             android:text="@string/app_name"
-            app:layout_constraintTop_toBottomOf="@+id/coin_algo"
-            app:layout_constraintStart_toEndOf="@+id/coin_image" />
+            android:textSize="@dimen/secondary_default"
+            app:layout_constraintStart_toEndOf="@+id/coin_image"
+            app:layout_constraintTop_toBottomOf="@+id/coin_algo" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

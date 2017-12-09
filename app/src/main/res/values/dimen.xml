@@ -4,5 +4,7 @@
     <dimen name="padding_small">8dp</dimen>
     <dimen name="secondary_padding">4dp</dimen>
     <dimen name="margin_small">8dp</dimen>
+    <dimen name="title_default">14sp</dimen>
+    <dimen name="secondary_default">11sp</dimen>
 
 </resources>
