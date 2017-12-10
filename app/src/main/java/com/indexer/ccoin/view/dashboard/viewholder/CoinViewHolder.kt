@@ -10,7 +10,6 @@ import com.indexer.ccoin.base.BaseViewHolder
 import com.indexer.ccoin.model.Coin
 import com.indexer.ccoin.utils.picasso
 import kotlinx.android.synthetic.main.coin_item.view.*
-import android.graphics.drawable.BitmapDrawable
 
 
 /**
@@ -26,19 +25,19 @@ class CoinViewHolder(itemView: View, listener: com.indexer.ccoin.view.dashboard.
 
     fun onBind(coin: Coin?) {
         this.coin = coin!!
-        itemView.coin_name.text = itemView.resources.getString(R.string.coin_name)
-                .plus(other = coin.coinName)
+        itemView.coin_name.text = coin.coinName
         itemView.coin_algo.text = itemView.resources.
                 getString(R.string.coin_algorithm).plus(other = coin.algorithm)
         itemView.context.picasso.load(itemView.resources.getString(R.string.default_url)
                 .plus(other = coin.imageUrl)).into(itemView.coin_image)
-        /*val bitmap = (itemView.coin_image.drawable as BitmapDrawable)
-        itemView.coin_image.background = bitmap*/
 
-        itemView.coin_total_supply.text = coin.totalCoinSupply
+        itemView.coin_total_supply.text = coin.totalCoinSupply.plus(itemView.resources.
+                getString(R.string.total))
+        itemView.coin_concept.text = coin.proofType
+        itemView.coin_concept.typeface = Typer.set(itemView.context).getFont(Font.ROBOTO_REGULAR)
         itemView.coin_name.typeface = Typer.set(itemView.context).getFont(Font.ROBOTO_CONDENSED_BOLD)
-        itemView.coin_algo.typeface = Typer.set(itemView.context).getFont(Font.ROBOTO_MEDIUM)
-        itemView.coin_total_supply.typeface = Typer.set(itemView.context).getFont(Font.ROBOTO_BLACK)
+        itemView.coin_algo.typeface = Typer.set(itemView.context).getFont(Font.ROBOTO_REGULAR)
+        itemView.coin_total_supply.typeface = Typer.set(itemView.context).getFont(Font.ROBOTO_REGULAR)
 
     }
 

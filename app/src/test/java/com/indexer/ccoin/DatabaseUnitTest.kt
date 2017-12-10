@@ -26,27 +26,24 @@ import org.robolectric.RuntimeEnvironment
  * @see [Testing documentation](http://d.android.com/tools/testing)
  */
 @RunWith(RobolectricTestRunner::class)
-class MainActivityUnitTest {
-
+class DatabaseUnitTest {
 
     private var mAppDatabase: AppDatabase? = null
-    private var coinViewModel: CoinListViewModel? = null
     @Before
     fun setUpDatabase() {
         val activity = Robolectric.setupActivity(MainActivity::class.java)
         mAppDatabase = AppDatabase.getDatabase(activity)
-        coinViewModel = ViewModelProviders.of(activity).get(CoinListViewModel::class.java)
     }
 
     @Test
     @Throws(Exception::class)
-    fun database_isCorrect() {
+    fun dataBaseWasCorrect() {
         assertNotEquals(null, mAppDatabase)
     }
 
     @Test
     @Throws(Exception::class)
-    fun DaoSelectisCollect() {
+    fun daoSelectWasCorrect() {
         assertNotEquals(0,
                 Observable.just(mAppDatabase).subscribeOn(Schedulers.io()).map { it ->
                     it.coinDao.getAllCoin()
