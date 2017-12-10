@@ -44,10 +44,10 @@ class DatabaseUnitTest {
     @Test
     @Throws(Exception::class)
     fun daoSelectWasCorrect() {
-        assertNotEquals(0,
-                Observable.just(mAppDatabase).subscribeOn(Schedulers.io()).map { it ->
-                    it.coinDao.getAllCoin()
-                }.blockingFirst() as ArrayList<Coin>)
+        val coinList = Observable.just(mAppDatabase).subscribeOn(Schedulers.io()).map { it ->
+            it.coinDao.getAllCoin()
+        }.blockingFirst() as ArrayList<Coin>
+        assertNotEquals(0, coinList)
     }
 
     @After

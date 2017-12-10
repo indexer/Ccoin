@@ -43,10 +43,10 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
     }
 
 
-    fun getCoinsWithPage(appDatabase: AppDatabase?):
+    fun getCoinsWithPage(appDatabase: AppDatabase?, latId: Int):
             LiveData<PagedList<Coin>>? = appDatabase?.coinDao?.getAllCoinListWithPage()?.let {
-        LivePagedListBuilder(it, Config.Builder().setPageSize(100).setEnablePlaceholders(false)
-                .setPrefetchDistance(10).build()).setInitialLoadKey(0).build()
+        LivePagedListBuilder(it, Config.Builder().setPageSize(10).setEnablePlaceholders(false)
+                .setPrefetchDistance(10).build()).setInitialLoadKey(latId).build()
     }
 
 

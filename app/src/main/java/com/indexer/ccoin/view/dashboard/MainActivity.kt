@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         conViewModel = ViewModelProviders.of(this)
                 .get(CoinListViewModel::class.java)
         with(conViewModel) {
-            conViewModel.getCoinsWithPage(mAppDatabase)?.observe(this@MainActivity, Observer {
+            conViewModel.getCoinsWithPage(mAppDatabase, 10)?.observe(this@MainActivity, Observer {
                 if (it?.size!! > 0) {
                     mprogress.visibility = View.GONE
                     coin_name.visibility = View.VISIBLE
