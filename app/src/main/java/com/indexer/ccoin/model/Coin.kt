@@ -23,7 +23,7 @@ class Coin() : Parcelable {
     @SerializedName("Algorithm")
     var algorithm: String? = ""
     @Expose
-    @SerializedName("CoinName")
+    @SerializedName("FullName")
     var coinName: String? = ""
     @Expose
     @SerializedName("ProofType")

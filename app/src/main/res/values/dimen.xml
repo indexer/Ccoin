@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="image_default">90dp</dimen>
-    <dimen name="padding_small">8dp</dimen>
+    <dimen name="image_default">60dp</dimen>
+    <dimen name="padding_small">60dp</dimen>
     <dimen name="secondary_padding">4dp</dimen>
+    <dimen name="secondary_margin">4dp</dimen>
     <dimen name="margin_small">8dp</dimen>
-    <dimen name="title_default">24sp</dimen>
+    <dimen name="title_default">18sp</dimen>
     <dimen name="secondary_default">14sp</dimen>
 </resources>
