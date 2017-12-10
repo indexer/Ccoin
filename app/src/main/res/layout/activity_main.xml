@@ -35,13 +35,51 @@
                 app:expandedTitleMarginStart="48dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <RelativeLayout
+
+                <LinearLayout
+                    android:layout_margin="16dp"
                     android:id="@+id/main.backdrop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fitsSystemWindows="true"
+                    android:gravity="center_vertical|center"
+                    android:orientation="vertical"
                     android:scaleType="centerCrop"
-                    app:layout_collapseMode="parallax" />
+                    app:layout_collapseMode="parallax">
+
+
+                    <TextView
+                        android:fontFamily="sans-serif-condensed"
+                        android:id="@+id/default_eth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_small"
+                        android:text="ETH : 31.07"
+                        android:textColor="@color/textColorAppBar"
+                        android:textSize="24sp" />
+
+
+                    <TextView
+                        android:fontFamily="sans-serif-condensed"
+                        android:id="@+id/default_usd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_small"
+                        android:text="USD : 13586.32"
+                        android:textColor="@color/textColorAppBar"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:fontFamily="sans-serif-condensed"
+                        android:id="@+id/default_sgd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_small"
+                        android:text="SGD : 18948.66"
+                        android:textColor="@color/textColorAppBar"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/main.toolbar"
@@ -66,6 +104,15 @@
             android:layout_below="@id/app_bar"
             android:visibility="visible"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_link_black_24dp"
+            app:layout_anchor="@id/coin_name"
+            app:layout_anchorGravity="bottom|right|end"
+            />
 
     </android.support.design.widget.CoordinatorLayout>
 </android.support.constraint.ConstraintLayout>

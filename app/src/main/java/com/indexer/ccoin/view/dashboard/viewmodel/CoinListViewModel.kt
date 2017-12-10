@@ -4,8 +4,11 @@ package com.indexer.ccoin.view.dashboard.viewmodel
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
+import android.arch.paging.DataSource
+import android.arch.paging.DataSource.Factory
+import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
-import android.util.Log
+import android.arch.paging.PagedList.*
 import com.indexer.ccoin.api.RestClient
 import com.indexer.ccoin.database.AppDatabase
 import com.indexer.ccoin.model.Coin
@@ -36,14 +39,16 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
             it.coinDao.getAllCoin()
         }.blockingFirst() as ArrayList<Coin>)
         return coinTotal
+
     }
 
 
     fun getCoinsWithPage(appDatabase: AppDatabase?):
-            LiveData<PagedList<Coin>>? = appDatabase?.coinDao
-            ?.getAllCoinListWithPage()?.create(0,
-            PagedList.Config.Builder().setPageSize(10).setEnablePlaceholders(false)
-                    .setPrefetchDistance(10).build())
+            LiveData<PagedList<Coin>>? = appDatabase?.coinDao?.getAllCoinListWithPage()?.let {
+        LivePagedListBuilder(it, Config.Builder().setPageSize(100).setEnablePlaceholders(false)
+                .setPrefetchDistance(10).build()).setInitialLoadKey(0).build()
+    }
+
 
     private fun insertData(coins: ArrayList<Coin>,
                            appDatabase: AppDatabase?) {

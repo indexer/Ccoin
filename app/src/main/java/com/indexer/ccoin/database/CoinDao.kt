@@ -1,9 +1,11 @@
 package com.indexer.ccoin.database
 
 import android.arch.lifecycle.LiveData
+import android.arch.paging.DataSource
+import android.arch.paging.LivePagedListBuilder
 import android.arch.persistence.room.Query
 import com.indexer.ccoin.model.Coin
-import android.arch.paging.LivePagedListProvider
+import android.arch.paging.PagedList
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
@@ -18,7 +20,7 @@ interface CoinDao {
     fun insertAllCoin(products: List<Coin>)
 
     @Query("SELECT * FROM coin ORDER BY SortOrder ASC")
-    fun getAllCoinListWithPage(): LivePagedListProvider<Int, Coin>
+    fun getAllCoinListWithPage(): DataSource.Factory<Int, Coin>
 
     @Query("SELECT * FROM coin")
     fun getAllCoin(): List<Coin>
