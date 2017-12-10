@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         coin_name.layoutManager = linearLayoutManager
         coin_name.adapter = coinListAdapter
-        val dividerItemDecoration = SpacesItemDecoration(8)
+        val dividerItemDecoration = SpacesItemDecoration(16)
         coin_name.addItemDecoration(dividerItemDecoration)
     }
 }

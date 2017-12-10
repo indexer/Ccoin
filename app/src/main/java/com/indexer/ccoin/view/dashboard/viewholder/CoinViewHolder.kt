@@ -33,7 +33,8 @@ class CoinViewHolder(itemView: View, listener: com.indexer.ccoin.view.dashboard.
 
         itemView.coin_total_supply.text = coin.totalCoinSupply.plus(itemView.resources.
                 getString(R.string.total))
-        itemView.coin_concept.text = coin.proofType
+        itemView.coin_url.text = itemView.context.resources.getString(R.string.default_url).plus(coin.Url)
+        itemView.coin_concept.text = itemView.resources.getString(R.string.coin_proof).plus(coin.proofType)
         itemView.coin_concept.typeface = Typer.set(itemView.context).getFont(Font.ROBOTO_REGULAR)
         itemView.coin_name.typeface = Typer.set(itemView.context).getFont(Font.ROBOTO_CONDENSED_BOLD)
         itemView.coin_algo.typeface = Typer.set(itemView.context).getFont(Font.ROBOTO_REGULAR)

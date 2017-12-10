@@ -33,6 +33,9 @@ class Coin() : Parcelable {
     var totalCoinSupply: String? = ""
     @SerializedName("SortOrder")
     var SortOrder: String? = ""
+    @SerializedName("Url")
+    var Url: String = ""
+
 
     constructor(parcel: Parcel) : this() {
         coinId = parcel.readString()
@@ -42,6 +45,7 @@ class Coin() : Parcelable {
         proofType = parcel.readString()
         totalCoinSupply = parcel.readString()
         SortOrder = parcel.readString()
+        Url = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -52,6 +56,7 @@ class Coin() : Parcelable {
         parcel.writeString(proofType)
         parcel.writeString(totalCoinSupply)
         parcel.writeString(SortOrder)
+        parcel.writeString(Url)
     }
 
     override fun describeContents(): Int {
