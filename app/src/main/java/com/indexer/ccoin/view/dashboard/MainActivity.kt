@@ -50,8 +50,9 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     private fun setUpViewModel() {
         conViewModel = ViewModelProviders.of(this)
                 .get(CoinListViewModel::class.java)
-        with(conViewModel) {
-            conViewModel.getCoinsWithPage(mAppDatabase, 10)?.observe(this@MainActivity, Observer {
+        with(conViewModel, {
+            conViewModel.getCoinsWithPage(mAppDatabase)?.observe(this@MainActivity, Observer {
+                Log.e("total size", "" + it?.size)
                 if (it?.size!! > 0) {
                     mprogress.visibility = View.GONE
                     coin_name.visibility = View.VISIBLE
@@ -61,10 +62,9 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
                 }
             })
             /* conViewModel.getMultipleIds(mAppDatabase)?.observe(this@MainActivity, Observer {
-          Log.e("size in muptiple", "" + it?.size)
-      })*/
-
-        }
+                  Log.e("size in muptiple", "" + it?.size)
+              })*/
+        })
     }
 
     private fun setUpRecyclerViewAndAdapter() {

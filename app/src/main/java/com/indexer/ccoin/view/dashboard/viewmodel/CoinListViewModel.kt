@@ -30,43 +30,27 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
     fun getMultipleIds(appDatabase: AppDatabase?):
             LiveData<List<Coin>>? = appDatabase?.coinDao?.findByCoinIds(list)
 
-    fun getAllValue(appDatabase: AppDatabase?): List<Coin> {
 
-        val coinTotal = Observable.just(appDatabase).subscribeOn(Schedulers.io()).map { it ->
-            it.coinDao.getAllCoin()
-        }.blockingFirst() as ArrayList<Coin>
-        System.out.println("mList" + Observable.just(appDatabase).subscribeOn(Schedulers.io()).map { it ->
-            it.coinDao.getAllCoin()
-        }.blockingFirst() as ArrayList<Coin>)
-        return coinTotal
+    fun getCoinsWithPage(appDatabase: AppDatabase?):
 
-    }
-
-
-    fun getCoinsWithPage(appDatabase: AppDatabase?, latId: Int):
             LiveData<PagedList<Coin>>? = appDatabase?.coinDao?.getAllCoinListWithPage()?.let {
         LivePagedListBuilder(it, Config.Builder().setPageSize(10).setEnablePlaceholders(false)
-                .setPrefetchDistance(10).build()).setInitialLoadKey(latId).build()
+                .setPrefetchDistance(10).build()).setInitialLoadKey(0).build()
     }
 
-
-    private fun insertData(coins: ArrayList<Coin>,
-                           appDatabase: AppDatabase?) {
+    private fun insertData(coins: ArrayList<Coin>, appDatabase: AppDatabase?) {
         Observable.just(appDatabase).subscribeOn(Schedulers.io()).map { it ->
             it.coinDao.insertAllCoin(coins)
         }.subscribe()
-
     }
 
     fun fetchDataFromCurrencyCompare(appDatabase: AppDatabase?) {
-        val coinList = RestClient.getService()
-                .getCoinList()
+        val coinList = RestClient.getService().getCoinList()
         coinList.enqueue(success = {
             if (it.isSuccessful) {
                 it.body()?.data!!.entries.forEach { (_, value) -> mList.add(value) }
                 insertData(coins = mList, appDatabase = appDatabase)
             }
-
         }, failure = { })
     }
 

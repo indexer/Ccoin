@@ -17,7 +17,6 @@ import com.indexer.ccoin.model.Coin
 abstract class AppDatabase : RoomDatabase() {
 
     val isDatabaseCreated: LiveData<Boolean> get() = mIsDatabaseCreated
-
     abstract val coinDao: CoinDao
 
     companion object {
@@ -31,8 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
                 null -> {
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
                             AppDatabase::class.java,
-                            "product_db")
-                            .build()
+                            "product_db").build()
                     mIsDatabaseCreated.value = true
                 }
             }

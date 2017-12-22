@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="image_default">60dp</dimen>
-    <dimen name="padding_small">60dp</dimen>
+    <dimen name="image_default">30dp</dimen>
+    <dimen name="padding_small">30dp</dimen>
     <dimen name="secondary_padding">4dp</dimen>
     <dimen name="secondary_margin">4dp</dimen>
     <dimen name="margin_small">8dp</dimen>

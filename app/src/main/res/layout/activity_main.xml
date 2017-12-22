@@ -8,16 +8,16 @@
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@android:color/background_light"
         android:fitsSystemWindows="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <android.support.design.widget.AppBarLayout
@@ -35,12 +35,11 @@
                 app:expandedTitleMarginStart="48dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-
                 <LinearLayout
-                    android:layout_margin="16dp"
                     android:id="@+id/main.backdrop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="16dp"
                     android:gravity="center_vertical|center"
                     android:orientation="vertical"
                     android:scaleType="centerCrop"
@@ -48,10 +47,10 @@
 
 
                     <TextView
-                        android:fontFamily="sans-serif-condensed"
                         android:id="@+id/default_eth"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
                         android:padding="@dimen/margin_small"
                         android:text="ETH : 31.07"
                         android:textColor="@color/textColorAppBar"
@@ -59,20 +58,20 @@
 
 
                     <TextView
-                        android:fontFamily="sans-serif-condensed"
                         android:id="@+id/default_usd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
                         android:padding="@dimen/margin_small"
                         android:text="USD : 13586.32"
                         android:textColor="@color/textColorAppBar"
                         android:textSize="24sp" />
 
                     <TextView
-                        android:fontFamily="sans-serif-condensed"
                         android:id="@+id/default_sgd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
                         android:padding="@dimen/margin_small"
                         android:text="SGD : 18948.66"
                         android:textColor="@color/textColorAppBar"
@@ -99,6 +98,7 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/coin_name"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/app_bar"
@@ -106,13 +106,12 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <android.support.design.widget.FloatingActionButton
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:src="@drawable/ic_link_black_24dp"
             app:layout_anchor="@id/coin_name"
-            app:layout_anchorGravity="bottom|right|end"
-            />
+            app:layout_anchorGravity="bottom|right|end" />
 
     </android.support.design.widget.CoordinatorLayout>
 </android.support.constraint.ConstraintLayout>
